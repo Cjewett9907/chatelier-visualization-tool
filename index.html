@@ -46,6 +46,8 @@
     
     <script  type="application/javascript" language="javascript">
         GlobalTemp = 1
+        state = {}
+        count = 0
 
         prepDraw = (num, rad, canvas_num = '', col, water_mol = false) => {
 
@@ -70,7 +72,9 @@
         }
 
         draw = (coords, canvas_num, water_mol) => {
+            
             let canvas =document.querySelector('#canvas'+canvas_num);
+            state[canvas_num] = coords
             let ctx = canvas.getContext('2d');
             ctx.save();
             ctx.clearRect(0,0,1100,800);
@@ -134,6 +138,113 @@
                 }
             }
 
+
+            if(state[canvas_num] && canvas_num === "1"  || canvas_num === "4"){
+                // if there are oxygens on their canvases
+                if(state[2]){
+                    for(let i = 0; i < state[canvas_num].length; i++){
+                        let oxy = state[canvas_num][i]
+                        for(let j = 0; j < state[2].length; j++){
+                            let h1 = state[2][j]
+                            for(let k = j+1; state[2].length - 1; k++){
+                                let h2 = state[2][k]
+                                if(!h2){
+                                    break;
+                                }
+                                // console.log(oxy, h1, h2)
+                                let xdiff1 = Math.abs(oxy[0] - h1[0])
+                                let ydiff1 = Math.abs(oxy[1] - h1[1])
+                                let dist1 = Math.sqrt(xdiff1**2 + ydiff1**2)
+
+                                let xdiff2 = Math.abs(oxy[0] - h2[0])
+                                let ydiff2 = Math.abs(oxy[1] - h2[1])
+                                let dist2 = Math.sqrt(xdiff2**2 + ydiff2**2)
+                                
+                                if (dist1 <= 80 && dist2 <= 80){
+                                    ro = state[canvas_num].splice(i, 1)
+                                    console.log("ro is !!!!", ro)
+                                    if(j>k){
+                                        state[2].splice(j, 1)
+                                        state[2].splice(k, 1)
+                                    } else{
+                                        state[2].splice(k, 1)
+                                        state[2].splice(j, 1)
+                                    }
+                                    //non functional water creation code
+                                    // if(state[5]){
+                                    //     state[5].push(ro)
+                                    //     console.log("state 5 is", state[5])
+                                    //     draw(state[5], "5", true)
+
+                                    // }  else{
+                                    //     state[5] = [ro]
+                                    //     console.log("state 5 is", state[5])
+                                    //     draw(state[5], "5", true)
+                                    // }
+                                    count += 1
+                                    console.log(count)
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+
+                if(state[3]){
+                    for(let i = 0; i < state[canvas_num].length; i++){
+                        let oxy = state[canvas_num][i]
+                        for(let j = 0; j < state[3].length; j++){
+                            let h1 = state[3][j]
+                            for(let k = j+1; state[3].length - 2; k++){
+                                let h2 = state[3][k]
+                                if(!h2){
+                                    break;
+                                }
+                                // console.log(oxy, h1, h2)
+                                let xdiff1 = Math.abs(oxy[0] - h1[0])
+                                let ydiff1 = Math.abs(oxy[1] - h1[1])
+                                let dist1 = Math.sqrt(xdiff1**2 + ydiff1**2)
+
+                                let xdiff2 = Math.abs(oxy[0] - h2[0])
+                                let ydiff2 = Math.abs(oxy[1] - h2[1])
+                                let dist2 = Math.sqrt(xdiff2**2 + ydiff2**2)
+                                // console.log("2")
+                                if (dist1 <= 80 && dist2 <= 80){
+                                    ro = state[canvas_num].splice(i, 1)
+                                    // rh1 = state[3].splice(j, 1)
+                                    // rh2 = state[3].splice(k, 1)
+                                    // console.log("state at canvas is", state[canvas_num])
+                                    console.log("ro is", ro)
+                                    if(j>k){
+                                        state[3].splice(j, 1)
+                                        state[3].splice(k, 1)
+                                    } else{
+                                        state[3].splice(k, 1)
+                                        state[3].splice(j, 1)
+                                    } 
+                                    //non functional water creation code
+                                    // console.log("state 3 is", state[3])
+                                    // if(state[5]){
+                                    //     state[5].push(ro)
+                                    //     console.log("state 5 is", state[5])
+                                    //     draw(ro, "5", true)
+                                    // }  else{
+                                    //     state[5] = [ro]
+                                    //     console.log("state 5 is", state[5])
+                                    //     draw(ro, "5", true)
+                                    // }
+                                    count += 1
+                                    console.log(count)
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+            }
+
             let looptimer = setTimeout(() => {
                 draw(coords, canvas_num, water_mol)
             }, 50);
@@ -157,13 +268,15 @@
     
     <section id="flex_parent">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3Uxm6-vrKwP0qcMiaZpn0YR2m5u5W7Sj-37UwETkV5cLG9Knnlw" alt="beaker image">
-        <button onclick="prepDraw(15,25,'1','red'); this.disabled = true" >Add Oxygen</button>
-        <button onclick="prepDraw(15,20,'2','white'); this.disabled = true" >Add Hydrogen</button>
+        <button onclick="prepDraw(10,25,'1','red'); this.disabled = true" >Add Oxygen</button>
+        <button onclick="prepDraw(20,20,'2','white'); this.disabled = true" >Add Hydrogen</button>
         <button onclick="GlobalTemp += 1" >Heat up the reaction!</button>
         <button onclick="GlobalTemp = 1" >Cool off the reaction!</button>
         <button onclick="prepDraw(50,20,'3','white'); this.disabled = true" >Increase Hydrogen Concentration!</button>
-        <button onclick="prepDraw(50,25,'4','red'); this.disabled = true" >Increase Oxygen Concentration!</button>
+        <button onclick="prepDraw(25,25,'4','red'); this.disabled = true" >Increase Oxygen Concentration!</button>
         <button onclick="prepDraw(30,25,'5','red', true); this.disabled = true" >Increase Water Concentration!</button>
+
+        
     </section>
 
     <section>

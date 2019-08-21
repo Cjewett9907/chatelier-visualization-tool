@@ -164,7 +164,7 @@
                                 let ydiff2 = Math.abs(oxy[1] - h2[1])
                                 let dist2 = Math.sqrt(xdiff2**2 + ydiff2**2)
                                 
-                                if (dist1 <= 80 && dist2 <= 80){
+                                if (dist1 <= 50 + (50 * GlobalTemp/3) && dist2 <= 50 + (50 * GlobalTemp/3)){
                                     ro = state[canvas_num].splice(i, 1)
                                     // console.log("ro is !!!!", ro)
                                     if(j>k){
@@ -214,7 +214,7 @@
                                 let ydiff2 = Math.abs(oxy[1] - h2[1])
                                 let dist2 = Math.sqrt(xdiff2**2 + ydiff2**2)
                                 // console.log("2")
-                                if (dist1 <= 80 && dist2 <= 80){
+                                if (dist1 <= 50 + (50 * GlobalTemp/3) && dist2 <= 50 + (50 * GlobalTemp/3)){
                                     ro = state[canvas_num].splice(i, 1)
                                     // rh1 = state[3].splice(j, 1)
                                     // rh2 = state[3].splice(k, 1)

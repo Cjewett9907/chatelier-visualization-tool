@@ -30,10 +30,6 @@
             width: 100%;
             height: 100%;
             z-index: 5;
-            /* background-image: url(https://myschoolpage.com/wp-content/uploads/2017/04/element-img.jpg); */
-            /* background-repeat: no-repeat; */
-            /* background-size: cover; */
-            
         }
 
         div h1{
@@ -148,7 +144,7 @@
 <body>
 
     <div id='splash' onclick="this.style.display = 'none'">
-        <h1>Welcome to the Lechatier's Principle Demo</h1>
+        <h1>Welcome to the Le Chatier's Principle Demo</h1>
         <h2>The reaction is 2H + O = H2O </h2>
         <h2>If 2 white hydrogen atoms are able to touch 1 red oxygen atom the formation of water is possible</h2>
         <h2>experiment with the reaction conditions to see if it increases or decreses the odds of driving the reaction forward</h2>
@@ -158,8 +154,8 @@
     
     <section id="flex_parent">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3Uxm6-vrKwP0qcMiaZpn0YR2m5u5W7Sj-37UwETkV5cLG9Knnlw" alt="beaker image">
-        <button onclick="prepDraw(15,25,'1','red'); this.disabled = true" >Draw Oxygen</button>
-        <button onclick="prepDraw(15,20,'2','white'); this.disabled = true" >Draw Hydrogen</button>
+        <button onclick="prepDraw(15,25,'1','red'); this.disabled = true" >Add Oxygen</button>
+        <button onclick="prepDraw(15,20,'2','white'); this.disabled = true" >Add Hydrogen</button>
         <button onclick="GlobalTemp += 1" >Heat up the reaction!</button>
         <button onclick="GlobalTemp = 1" >Cool off the reaction!</button>
         <button onclick="prepDraw(50,20,'3','white'); this.disabled = true" >Increase Hydrogen Concentration!</button>

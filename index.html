@@ -61,7 +61,6 @@
                 if(negX === 1){
                     xIter *= -1
                 }
-
                 if(negY === 1){
                     yIter *= -1
                 }
@@ -69,7 +68,6 @@
             }
             draw(coords, canvas_num, water_mol);
         }
-
 
         draw = (coords, canvas_num, water_mol) => {
             let canvas =document.querySelector('#canvas'+canvas_num);
@@ -87,7 +85,6 @@
                 // let opa = Math.random();
 
                 let opa = 1
-
                 if(water_mol){
                     //draw a water molecule
                     coords[i][0] = coords[i][0] + (coords[i][2] * GlobalTemp)
@@ -111,7 +108,6 @@
                 } else {
 
                 // draw an atom
-
                 ctx.fillStyle = coords[i][5]
                 coords[i][0] = coords[i][0] + (coords[i][2] * GlobalTemp)
                 coords[i][1] = coords[i][1] + (coords[i][3] * GlobalTemp)
@@ -122,17 +118,22 @@
                 }
 
             }
-
             for(var i = 0; i < coords.length; i++){
-                if (coords[i][0] >= 1100 -(coords[i][4]) || coords[i][0] <= coords[i][4]){
+                // Check if the current position is outside of the canvas area, if so reverse the X or Y direction
+
+                if (coords[i][0] >= 1100 -(coords[i][4]) || coords[i][0] < coords[i][4]){
                     coords[i][2] *= -1
+                    // gives the atoms alittle 'bounce' off the walls to avoid edge case 'sticky atoms' bug
+                    coords[i][0] = coords[i][0] + 2 *(coords[i][2] * GlobalTemp)
                 }
 
-                if (coords[i][1] >= 800 - (coords[i][4])|| coords[i][1] <= coords[i][4] + 1){
+                if (coords[i][1] >= 800 - (coords[i][4])|| coords[i][1] < coords[i][4]){
                     coords[i][3] *= -1
+                    // gives the atoms alittle 'bounce' off the walls to avoid edge case 'sticky atoms' bug
+                    coords[i][1] = coords[i][1] + 2 *(coords[i][3] * GlobalTemp)
                 }
             }
-            
+
             let looptimer = setTimeout(() => {
                 draw(coords, canvas_num, water_mol)
             }, 50);
@@ -144,10 +145,10 @@
 <body>
 
     <div id='splash' onclick="this.style.display = 'none'">
-        <h1>Welcome to the Le Chatelier's Principle Demo</h1>
+        <h1>Welcome to the Molecular Visualization Sandbox</h1>
         <h2>The reaction is 2H + O = H2O </h2>
         <h2>If 2 white hydrogen atoms are able to touch 1 red oxygen atom the formation of water is possible</h2>
-        <h2>experiment with the reaction conditions to see if it increases or decreases the odds of driving the reaction forward</h2>
+        <h2>Experiment with the reaction conditions to see if it increases or decreases the odds of driving the reaction forward</h2>
 
         <h1>CLICK ANYWHERE TO CONTINUE</h1>
         <img src="https://myschoolpage.com/wp-content/uploads/2017/04/element-img.jpg" alt="">

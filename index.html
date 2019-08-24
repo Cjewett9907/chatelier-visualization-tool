@@ -155,7 +155,7 @@
                                 if(!h2){
                                     break;
                                 }
-                                // console.log(oxy, h1, h2)
+                                
                                 let xdiff1 = Math.abs(oxy[0] - h1[0])
                                 let ydiff1 = Math.abs(oxy[1] - h1[1])
                                 let dist1 = Math.sqrt(xdiff1**2 + ydiff1**2)
@@ -166,7 +166,7 @@
                                 
                                 if (dist1 <= 50 + (50 * GlobalTemp/3) && dist2 <= 50 + (50 * GlobalTemp/3)){
                                     ro = state[canvas_num].splice(i, 1)
-                                    // console.log("ro is !!!!", ro)
+                                
                                     if(j>k){
                                         state[2].splice(j, 1)
                                         state[2].splice(k, 1)
@@ -207,7 +207,6 @@
                                 if(!h2){
                                     break;
                                 }
-                                // console.log(oxy, h1, h2)
                                 let xdiff1 = Math.abs(oxy[0] - h1[0])
                                 let ydiff1 = Math.abs(oxy[1] - h1[1])
                                 let dist1 = Math.sqrt(xdiff1**2 + ydiff1**2)
@@ -215,13 +214,10 @@
                                 let xdiff2 = Math.abs(oxy[0] - h2[0])
                                 let ydiff2 = Math.abs(oxy[1] - h2[1])
                                 let dist2 = Math.sqrt(xdiff2**2 + ydiff2**2)
-                                // console.log("2")
+                    
                                 if (dist1 <= 50 + (50 * GlobalTemp/3) && dist2 <= 50 + (50 * GlobalTemp/3)){
                                     ro = state[canvas_num].splice(i, 1)
-                                    // rh1 = state[3].splice(j, 1)
-                                    // rh2 = state[3].splice(k, 1)
-                                    // console.log("state at canvas is", state[canvas_num])
-                                    // console.log("ro is", ro)
+
                                     if(j>k){
                                         state[3].splice(j, 1)
                                         state[3].splice(k, 1)
